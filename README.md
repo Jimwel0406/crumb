@@ -1,5 +1,3 @@
-<img src="public/hero-cupcake-doodle.png" alt="crumb. — a hand-drawn cupcake illustration in pink and butter yellow" width="220" />
-
 # crumb.
 
 A single-page website for a fictional small-batch cupcake shop, built as a personal front-end design study.
