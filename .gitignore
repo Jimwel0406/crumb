@@ -1,0 +1,8 @@
+node_modules/
+.next/
+out/
+*.log
+.playwright-mcp/
+farmstand-pop-design.md
+preserve-jar-playground-design.md
+server.log
