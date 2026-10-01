@@ -19,10 +19,19 @@ if (typeof window !== "undefined") {
   useGLTF.preload(MODEL_URL);
 }
 
+// Entrance: the cupcake rises from below the drip line, scaling up and
+// unwinding a slight yaw as it lands — one 0.75s ease-out, no bounce,
+// held back 0.35s so it lands after the headline. Reduced motion skips
+// straight to the final pose (enter starts at 1).
+const ENTER_DELAY = 0.35;
+const ENTER_TIME = 0.75;
+
 function Cupcake({ still }) {
   const { scene } = useGLTF(MODEL_URL);
   const spin = useRef(null);
   const float = useRef(null);
+  const timer = useRef(0);
+  const enter = useRef(still ? 1 : 0);
 
   // Clone so React Strict Mode double-mounting cannot mutating-share GPU
   // resources between instances.
@@ -59,11 +68,29 @@ function Cupcake({ still }) {
     };
   }, [model]);
 
-  useFrame((state) => {
-    if (still) return;
+  useFrame((state, delta) => {
+    if (enter.current < 1) {
+      timer.current += delta;
+      enter.current = Math.min(
+        1,
+        Math.max(0, (timer.current - ENTER_DELAY) / ENTER_TIME)
+      );
+    }
+    // ease-out cubic: fast rise that settles, no overshoot
+    const e = 1 - Math.pow(1 - enter.current, 3);
     const t = state.clock.elapsedTime;
-    if (spin.current) spin.current.rotation.y = Math.sin(t * 0.32) * 0.34;
-    if (float.current) float.current.position.y = Math.sin(t * 0.62) * 0.012;
+    const bob = still ? 0 : Math.sin(t * 0.62) * 0.012;
+    const yaw = still ? 0 : Math.sin(t * 0.32) * 0.34;
+
+    if (float.current) {
+      // hidden through the hold-back so there is no frozen pre-pose
+      float.current.visible = still || timer.current >= ENTER_DELAY;
+      float.current.scale.setScalar(0.78 + 0.22 * e);
+      float.current.position.y = bob - (1 - e) * 0.2;
+    }
+    if (spin.current) {
+      spin.current.rotation.y = yaw - (1 - e) * 0.5;
+    }
   });
 
   return (

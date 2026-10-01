@@ -16,11 +16,11 @@ The page is also a working demonstration of the fundamentals: real metadata, one
 
 **Art direction**
 
-- Ten-section single-page flow — hero, reservation band, how-it-works, three story panels, quotes carousel, today's case, closing, footer — each with its own layout logic rather than one repeated card grid.
+- Short single-page flow — hero, reservation band, three story panels, quotes carousel, today's case, closing, footer — each with its own layout logic rather than one repeated card grid.
 - Two typefaces doing distinct jobs: **Fraunces** (variable, with the `SOFT` and `WONK` axes tuned) for display, **Outfit** for body — both self-hosted and preloaded via `next/font`.
 - Every section boundary is a **real seam**, not a flat hairline: a `<Divider>` component draws scallop, drip and big-lobe shapes as inline SVG with the colour of the section above and below, so the dividers physically connect the bands.
 - The palette is deliberately rationed. Cream and dough carry the page; butter appears only in the reservation band, the quotes band and hover states; pink is reserved for accents so it never stops reading as an accent.
-- Decorations are brand-appropriate rather than stock: hand-drawn piped-frosting corners in the reservation band, a folded box with stressed flaps in the steps section, monogram bottle-cap avatars in the quotes carousel.
+- Decorations are brand-appropriate rather than stock: hand-drawn piped-frosting corners in the reservation band, monogram bottle-cap avatars in the quotes carousel.
 - No italics anywhere, and copy written to avoid the usual AI cadence — no balanced couplets, no tricolons, no em-dash asides.
 
 **Engineering**
@@ -76,9 +76,7 @@ components/
 ├── Hero.jsx            # hero column, side decoration, drip seam
 ├── HeroCupcake.jsx     # three-fiber scene: camera fit, lighting, float/spin
 ├── HeroCupcakeClient.jsx  # next/dynamic boundary for the 3D scene
-├── Sections.jsx        # Band, Steps, Panels, Strip
-├── StepsBox.jsx        # the folded box (server component)
-├── BoxOpen.jsx         # four stressed-flap SVGs
+├── Sections.jsx        # Band, Panels, Strip
 ├── Quotes.jsx          # carousel with monogram avatars
 ├── Closing.jsx         # visit block + footer
 ├── Divider.jsx         # scallop / drip / big seam shapes
@@ -86,7 +84,6 @@ components/
 ├── Reveal.jsx          # intersection-based entry animations
 ├── Parallax.jsx        # scroll-linked float
 ├── Icing.jsx           # the butter icing edge under the navbar
-└── Underline.jsx       # hand-drawn link underline
 lib/
 └── images.js           # the splash photography set
 public/

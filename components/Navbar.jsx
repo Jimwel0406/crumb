@@ -22,7 +22,6 @@ export default function Navbar() {
 
         <nav className="nav__links" aria-label="Primary">
           <a href="#boxes">Boxes</a>
-          <a href="#story">Our story</a>
           <a href="#flavours">Flavours</a>
           <a href="#visit">Visit</a>
         </nav>

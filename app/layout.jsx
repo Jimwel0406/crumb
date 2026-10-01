@@ -22,6 +22,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
+        {/* the hero's 3d model is the page's biggest asset: react hoists this
+            to <head> so it starts fetching while the html is still parsing,
+            instead of waiting for hydration. */}
+        <link rel="preload" href="/cupcake.glb" as="fetch" crossOrigin="anonymous" />
         <noscript>
           <style>{`
             .reveal, .reveal--words .w { opacity: 1 !important; transform: none !important; clip-path: none !important; }

@@ -3,6 +3,7 @@ node_modules/
 out/
 *.log
 .playwright-mcp/
+.backup/
 farmstand-pop-design.md
 preserve-jar-playground-design.md
 server.log

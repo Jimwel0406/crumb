@@ -221,64 +221,6 @@ p {
   font-size: 0.875rem;
 }
 
-/* text link with arrow */
-
-.arrow-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 11px;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  letter-spacing: 0.04em;
-  transition: gap var(--speed) var(--ease), color var(--speed) var(--ease);
-}
-
-.arrow-link__line {
-  position: absolute;
-  left: -3px;
-  bottom: 0;
-  width: calc(100% + 6px);
-  height: 9px;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.arrow-link__line path {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  transition: stroke var(--speed) var(--ease);
-}
-
-.arrow-link:hover {
-  gap: 16px;
-  color: var(--accent);
-}
-
-.arrow-link:hover .arrow-link__line {
-  animation: underline-wiggle 0.5s ease-in-out;
-}
-
-.arrow-link:hover .arrow-link__line path {
-  stroke: var(--ink);
-}
-
-@keyframes underline-wiggle {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-3px);
-  }
-  75% {
-    transform: translateX(3px);
-  }
-}
-
 /* ==========================================================================
    navbar — full-bleed, square, sticky
    ========================================================================== */
@@ -415,67 +357,85 @@ p {
   z-index: 1;
 }
 
-.hero__deco-blob {
+/* the sunrise: a flat butter disc low in the frame — the copy is "baked
+   before sunrise", so the sun sits under the words, rising behind the
+   cupcake. Clipped by .hero's overflow, so it runs off like a horizon. */
+.hero__sun {
   position: absolute;
-  border-radius: 58% 42% 47% 53% / 46% 52% 48% 54%;
-}
-
-.hero__deco-blob--butter {
-  width: clamp(150px, 15vw, 250px);
+  z-index: 0;
+  left: 50%;
+  bottom: -18vw;
+  transform: translateX(-50%);
+  width: clamp(340px, 62vw, 780px);
   aspect-ratio: 1;
+  border-radius: 50%;
   background: var(--butter);
-  top: 6%;
-  left: 4%;
+  pointer-events: none;
 }
 
-.hero__deco-blob--dough {
-  width: clamp(120px, 12vw, 200px);
-  aspect-ratio: 1;
-  background: var(--dough);
-  bottom: 12%;
-  left: 12%;
-  border-radius: 44% 56% 60% 40% / 55% 45% 55% 45%;
+@media (max-width: 700px) {
+  .hero__sun {
+    bottom: -34vw;
+  }
 }
 
-.hero__deco-blob--pistachio {
-  width: clamp(80px, 8vw, 130px);
-  aspect-ratio: 1;
-  background: var(--pistachio);
-  border-radius: 50%;
-  opacity: 0.9;
-  top: 20%;
-  right: 7%;
-}
-
-.hero__deco-dot {
+/* sprinkles — the confetti motif replaces the old abstract blobs: brand hues
+   in ink-outlined capsules, scattered in the gutters (desktop only). */
+.hero__sprinkle {
   position: absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
+  width: clamp(26px, 2.4vw, 40px);
+  height: clamp(11px, 1vw, 16px);
+  border: 2px solid var(--ink);
+  border-radius: var(--pill);
 }
 
-.hero__deco-dot--1 {
+.hero__sprinkle--1 {
   background: var(--accent);
-  top: 30%;
-  left: 14%;
-}
-
-.hero__deco-dot--2 {
-  background: var(--butter);
-  top: 60%;
+  top: 17%;
   left: 17%;
+  transform: rotate(-26deg);
 }
 
-.hero__deco-dot--3 {
+.hero__sprinkle--2 {
+  background: var(--butter);
+  top: 45%;
+  left: 7%;
+  transform: rotate(42deg);
+}
+
+.hero__sprinkle--3 {
   background: var(--pistachio);
-  top: 34%;
-  right: 15%;
+  top: 71%;
+  left: 15%;
+  transform: rotate(-12deg);
 }
 
-.hero__deco-dot--4 {
+.hero__sprinkle--4 {
   background: var(--accent);
-  top: 64%;
-  right: 13%;
+  top: 21%;
+  right: 12%;
+  transform: rotate(31deg);
+}
+
+.hero__sprinkle--5 {
+  background: var(--butter);
+  top: 47%;
+  right: 6%;
+  transform: rotate(-38deg);
+}
+
+.hero__sprinkle--6 {
+  background: var(--pistachio);
+  top: 74%;
+  right: 16%;
+  transform: rotate(18deg);
+}
+
+.hero__sprinkle--7 {
+  background: var(--accent);
+  top: 87%;
+  left: 6%;
+  transform: rotate(56deg);
 }
 
 .hero__deco-art {
@@ -566,36 +526,6 @@ p {
   margin-top: 34px;
 }
 
-.hero__meta {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 28px;
-  margin-top: 44px;
-  padding-top: 30px;
-}
-
-.hero__meta div {
-  display: grid;
-  gap: 2px;
-  justify-items: center;
-}
-
-.hero__meta strong {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.hero__meta span {
-  font-size: 0.8125rem;
-  color: var(--ink-soft);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
 /* circle-photo */
 
 .circle-photo {
@@ -616,7 +546,7 @@ p {
    The wrapper is the sized element; the canvas fills it. */
 .hero__anchor {
   position: relative;
-  z-index: 0;
+  z-index: 2;
   width: clamp(240px, 46vw, 460px);
   /* the model is ~1:1.16, so a near-square box frames it without dead space */
   aspect-ratio: 6 / 7;
@@ -665,6 +595,22 @@ p {
   margin-bottom: -1px;
 }
 
+/* the seam into the closing band is pulled down to sit ON the section it
+   introduces: its gaps are transparent, so the lit shop surface shows through
+   instead of a flat strip of the band colour. 40px = the big scallop tile. */
+.seam--over {
+  position: relative;
+  z-index: 3;
+  margin-bottom: -40px;
+}
+
+/* the hero's drip must paint over the sunrise disc (both are in the hero's
+   stacking order), while the cupcake keeps its bleed over the seam. */
+.hero .drip {
+  position: relative;
+  z-index: 1;
+}
+
 /* ==========================================================================
    accent band
    ========================================================================== */
@@ -675,7 +621,7 @@ p {
   background: var(--accent);
   color: var(--ink);
   text-align: center;
-  padding: clamp(68px, 8vw, 108px) 0 clamp(76px, 9vw, 116px);
+  padding: clamp(80px, 9.5vw, 128px) 0 clamp(88px, 10.5vw, 140px);
 }
 
 /* piped frosting swirls sweeping in from the two opposite corners */
@@ -734,7 +680,7 @@ p {
   z-index: 1;
   display: grid;
   justify-items: center;
-  gap: clamp(28px, 3.4vw, 42px);
+  gap: clamp(36px, 4.4vw, 58px);
 }
 
 .band__head {
@@ -746,11 +692,85 @@ p {
 .band__title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.4rem, 6.2vw, 4.35rem);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  max-width: 16ch;
+  font-size: clamp(2.9rem, 7.6vw, 5.75rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  max-width: 15ch;
   text-wrap: balance;
+}
+
+/* the second half of the heading flips to white so the sentence
+   reads in two tones across the pink band. */
+.band__title-accent {
+  color: var(--cream);
+}
+
+/* the reservation ledger: four facts ruled across the full container,
+   labels in the small caps, values set as display type. No card — the
+   facts sit straight on the band so the heading keeps owning it. */
+.band__facts {
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+.band__fact {
+  padding: clamp(18px, 2.4vw, 30px) clamp(14px, 2vw, 28px);
+  border-left: 1px solid rgba(36, 22, 17, 0.4);
+  text-align: left;
+}
+
+.band__fact:first-child {
+  border-left: 0;
+}
+
+.band__fact dt {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.band__fact dd {
+  margin: 10px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 2.5vw, 2.1rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+@media (max-width: 900px) {
+  .band__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .band__fact:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .band__fact:nth-child(n + 3) {
+    border-top: 1px solid rgba(36, 22, 17, 0.4);
+  }
+}
+
+@media (max-width: 560px) {
+  .band__facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .band__fact {
+    border-left: 0;
+  }
+
+  .band__fact + .band__fact {
+    border-top: 1px solid rgba(36, 22, 17, 0.4);
+  }
 }
 
 .band__actions {
@@ -759,23 +779,6 @@ p {
   align-items: center;
   justify-content: center;
   gap: clamp(18px, 2.6vw, 34px);
-}
-
-/* on the pink band the accent-coloured link and underline disappear */
-.band .band__link {
-  color: var(--ink);
-}
-
-.band .band__link .arrow-link__line path {
-  stroke: var(--ink);
-}
-
-.band .band__link:hover {
-  color: var(--ink);
-}
-
-.band .band__link:hover .arrow-link__line path {
-  stroke: var(--butter);
 }
 
 @media (max-width: 640px) {
@@ -787,188 +790,6 @@ p {
   .band__actions {
     flex-direction: column;
     gap: 22px;
-  }
-}
-
-/* ==========================================================================
-   steps
-   ========================================================================== */
-
-.steps {
-  background: var(--cream);
-  padding: var(--section) 0;
-  text-align: center;
-}
-
-.steps__head {
-  display: grid;
-  justify-items: center;
-  gap: 18px;
-  margin-bottom: clamp(44px, 5vw, 68px);
-}
-
-/* the steps sit inside an open box */
-.steps__box {
-  position: relative;
-  max-width: 1040px;
-  margin: clamp(64px, 8vw, 104px) auto 0;
-  padding: clamp(36px, 4vw, 58px) clamp(26px, 3.2vw, 48px)
-    clamp(32px, 3.6vw, 52px);
-  background: var(--dough);
-  border: 3px solid var(--ink);
-  border-radius: 26px;
-  box-shadow: 12px 12px 0 var(--hairline);
-}
-
-/* looking into the box: the opening reads as a shadow under the top edge */
-.steps__box::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 54px;
-  border-radius: 23px 23px 0 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(36, 22, 17, 0.16),
-    rgba(36, 22, 17, 0)
-  );
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* four flaps splayed out of the opening, so the box reads as open */
-.openbox {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.openbox__flap {
-  position: absolute;
-  fill: var(--dough);
-  stroke: var(--ink);
-  stroke-width: 3;
-  stroke-linejoin: round;
-}
-
-.openbox__flap--back {
-  left: 5%;
-  width: 90%;
-  height: clamp(30px, 3.4vw, 46px);
-  bottom: 100%;
-  margin-bottom: -12px;
-}
-
-.openbox__flap--front {
-  left: 5%;
-  width: 90%;
-  height: clamp(22px, 2.6vw, 36px);
-  top: 100%;
-  margin-top: -11px;
-}
-
-.openbox__flap--left {
-  top: 8%;
-  height: 84%;
-  width: clamp(34px, 3.6vw, 54px);
-  right: 100%;
-  margin-right: -6px;
-}
-
-.openbox__flap--right {
-  top: 8%;
-  height: 84%;
-  width: clamp(34px, 3.6vw, 54px);
-  left: 100%;
-  margin-left: -6px;
-}
-
-.steps__grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(24px, 3vw, 40px);
-  text-align: left;
-}
-
-.step {
-  display: grid;
-  gap: 14px;
-  align-content: start;
-}
-
-.step__num {
-  display: grid;
-  place-items: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.25rem;
-  border: 2px solid var(--ink);
-}
-
-.step h3 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.4rem;
-  line-height: 1.16;
-  letter-spacing: -0.01em;
-  min-height: 2.32em;
-  text-wrap: balance;
-}
-
-@media (min-width: 1041px) {
-  .step h3 {
-    max-width: 132px;
-    text-wrap: normal;
-  }
-}
-
-.steps__foot {
-  margin-top: clamp(44px, 5vw, 64px);
-}
-
-@media (max-width: 1040px) {
-  .steps__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(22px, 3vw, 34px) clamp(24px, 3vw, 40px);
-  }
-
-  .steps__box {
-    margin-left: 0;
-    padding-right: clamp(30px, 5vw, 54px);
-    padding-bottom: clamp(56px, 7vw, 78px);
-  }
-}
-
-@media (max-width: 560px) {
-  .steps__box {
-    padding: 30px 20px 26px;
-    margin-top: clamp(52px, 14vw, 74px);
-    border-radius: 20px;
-    box-shadow: 8px 8px 0 var(--hairline);
-  }
-
-  /* keep the side flaps inside the viewport: the box is inset by the page
-     gutter, so a flap at left/right 100% would push past the screen edge */
-  .openbox__flap--left,
-  .openbox__flap--right {
-    width: 22px;
-    border-radius: 4px;
-  }
-
-  .openbox__flap--left {
-    margin-right: -12px;
-  }
-
-  .openbox__flap--right {
-    margin-left: -12px;
   }
 }
 
@@ -1218,30 +1039,7 @@ p {
 
 .strip {
   background: var(--cream);
-  padding: var(--section) 0;
-}
-
-.strip__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: clamp(40px, 5vw, 60px);
-}
-
-.strip__head > * {
-  min-width: 0;
-}
-
-/* the heading Reveal holds an inline-flex eyebrow above a block title; without a
-   row layout the two share one line-box and sit on the font's natural leading.
-   Scoped by class, not `.reveal`, because the arrow link is itself a Reveal. */
-.strip__head-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 18px;
+  padding: clamp(48px, 6vw, 76px) 0;
 }
 
 .strip__grid {
@@ -1326,35 +1124,72 @@ p {
    ========================================================================== */
 
 .closing {
+  position: relative;
+  overflow: hidden;
   background: var(--ink);
   color: var(--on-dark);
 }
 
-.closing__cta {
+/* the shop case photo becomes the section's lit surface — full-bleed
+   behind a scrim so it reads as texture through the dark, never as a
+   second object competing with the headline. */
+.closing__bg {
+  position: absolute;
+  inset: -8% 0;
+  z-index: 0;
+}
+
+.closing__photo {
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+/* ink scrim + one confined butter glow: the dark band reads as a lit
+   window at dusk rather than a flat black hole. It opens fully clear for
+   the first 44px so the scallop seam above shows real photo through its
+   gaps, then closes to full ink before the headline begins. */
+.closing__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      90% 70% at 88% 4%,
+      rgba(255, 207, 92, 0.22),
+      transparent 60%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(36, 22, 17, 0) 0,
+      rgba(36, 22, 17, 0.92) 44px,
+      rgba(36, 22, 17, 0.76) 52%,
+      rgba(36, 22, 17, 0.9) 78%,
+      var(--ink) 100%
+    );
+}
+
+.closing__inner {
+  position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: center;
-  gap: clamp(32px, 5vw, 72px);
+  justify-items: center;
+  gap: clamp(30px, 4vw, 46px);
   padding-top: var(--section);
   padding-bottom: var(--section);
+  text-align: center;
 }
 
-.closing__body {
-  display: grid;
-  gap: 22px;
-  justify-items: start;
-}
-
-.closing__body .eyebrow {
-  color: var(--ink);
-}
-
+/* the dominant element: the farewell line owns the full container at
+   display scale — no column may contain it. */
 .closing__title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: var(--text-h1);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 8.4vw, 8.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  max-width: 16ch;
+  text-wrap: balance;
 }
 
 .closing__title em {
@@ -1363,52 +1198,46 @@ p {
   color: var(--butter);
 }
 
-.closing__copy {
-  color: #cbb8ab;
-  max-width: 48ch;
-}
-
 .closing__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
-  margin-top: 8px;
 }
 
+/* hours as one shop-sign line, split by butter dots */
 .closing__hours {
-  display: grid;
-  gap: 6px;
-  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 12px;
   font-size: 0.9375rem;
   color: #cbb8ab;
+}
+
+.closing__hours span {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 0 clamp(16px, 2.4vw, 30px);
+}
+
+.closing__hours span + span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--butter);
+  transform: translateY(-50%);
 }
 
 .closing__hours strong {
   color: var(--on-dark);
   font-weight: 600;
-}
-
-.closing__media {
-  position: relative;
-}
-
-.closing__media::before {
-  content: "";
-  position: absolute;
-  width: 88%;
-  aspect-ratio: 1;
-  background: var(--accent);
-  border-radius: 54% 46% 42% 58% / 48% 56% 44% 52%;
-  top: -5%;
-  right: 0;
-}
-
-.closing__media .circle-photo {
-  position: relative;
-  width: min(100%, 440px);
-  aspect-ratio: 1;
-  margin-left: auto;
-  border-color: var(--ink);
 }
 
 .footer {
@@ -1525,14 +1354,6 @@ p {
 }
 
 @media (max-width: 960px) {
-  .closing__cta {
-    grid-template-columns: 1fr;
-  }
-
-  .closing__media .circle-photo {
-    margin: 0 auto;
-  }
-
   .footer__grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1868,7 +1689,6 @@ p {
    at the centre — light sections use a warm dash, dark ones a cocoa dash
    ========================================================================== */
 
-.hero__meta::before,
 .panel + .panel::before,
 .footer::before,
 .footer__bottom::before {
@@ -1901,160 +1721,11 @@ p {
 
 /* ==========================================================================
    decorated descriptions
-   one distinct treatment per section — frosting, index card, taped
-   pull-quote, posted rule, docket, speech bubble, notice board, scribble.
+   one distinct treatment per section — index card, taped
+   pull-quote, posted rule, docket, speech bubble, scribble.
    ========================================================================== */
 
-/* 1 · band — frosted icing card with sprinkles, drop cap and a docket */
-.note-frost {
-  position: relative;
-  width: min(100%, 640px);
-  background: var(--cream);
-  color: var(--ink);
-  border: 2px solid var(--ink);
-  border-radius: 22px;
-  padding: 46px 38px 26px;
-  box-shadow: 10px 10px 0 var(--ink);
-  text-align: left;
-}
-
-.note-frost__icing {
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  height: 26px;
-  color: var(--butter);
-  filter: drop-shadow(0 3px 0 rgba(36, 22, 17, 0.16));
-  pointer-events: none;
-}
-
-.note-frost__icing .icing {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.note-frost__sprinkles {
-  position: absolute;
-  inset: 4px 0 auto 0;
-  height: 26px;
-  pointer-events: none;
-}
-
-.note-frost__sprinkles::before,
-.note-frost__sprinkles::after {
-  content: "";
-  position: absolute;
-  width: 15px;
-  height: 5px;
-  border-radius: 3px;
-  transform: rotate(22deg);
-}
-
-.note-frost__sprinkles::before {
-  left: 15%;
-  top: 9px;
-  background: var(--accent);
-  box-shadow: 40px 7px 0 -1px var(--pistachio), 84px -2px 0 var(--accent),
-    126px 6px 0 -1px var(--pistachio);
-}
-
-.note-frost__sprinkles::after {
-  right: 13%;
-  top: 8px;
-  background: var(--pistachio);
-  box-shadow: -38px 8px 0 var(--accent), -80px 0 0 var(--pistachio),
-    -122px 7px 0 -1px var(--accent);
-}
-
-.note-frost__copy {
-  font-size: 1.0625rem;
-  font-weight: 500;
-  line-height: 1.6;
-  max-width: 46ch;
-}
-
-.note-frost__copy::first-letter {
-  float: left;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 2.9em;
-  line-height: 0.78;
-  padding: 6px 12px 0 0;
-  color: var(--accent);
-}
-
-.note-frost__rows {
-  margin-top: 24px;
-  padding-top: 6px;
-  border-top: 2px dashed var(--hairline);
-}
-
-.note-frost__row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 13px 0;
-  border-bottom: 1px dotted var(--hairline);
-}
-
-.note-frost__row:last-child {
-  border-bottom: 0;
-  padding-bottom: 4px;
-}
-
-.note-frost__row dt {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.note-frost__row dd {
-  margin: 0;
-  font-size: 0.9375rem;
-  font-weight: 700;
-  text-align: right;
-}
-
-@media (max-width: 560px) {
-  .note-frost {
-    padding: 40px 24px 20px;
-    box-shadow: 7px 7px 0 var(--ink);
-  }
-
-  .note-frost__row {
-    gap: 12px;
-  }
-}
-
-/* 2 · steps — recipe index card with a folded corner */
-.step__copy {
-  position: relative;
-  padding: 18px 20px 16px;
-  background: var(--cream);
-  border-radius: 6px 16px 16px 16px;
-  border-left: 3px dashed var(--accent);
-  box-shadow: 5px 5px 0 rgba(36, 22, 17, 0.14);
-  font-size: 0.9375rem;
-  color: var(--ink-soft);
-}
-
-.step__copy::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 24px;
-  height: 24px;
-  background: linear-gradient(225deg, var(--dough) 48%, var(--hairline) 48%);
-  border-radius: 0 14px 0 0;
-}
-
-/* 3 · panels — taped pull-quote + highlighted takeaway */
+/* 3 · panels — taped pull-quote */
 .panel__quote {
   position: relative;
   margin: 0 0 6px;
@@ -2093,37 +1764,6 @@ p {
   border-right: 1px dashed rgba(36, 22, 17, 0.28);
   border-radius: 2px;
   transform: rotate(-3deg);
-}
-
-.panel__copy {
-  position: relative;
-  padding-left: 18px;
-}
-
-.panel__copy::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 2px;
-  bottom: 2px;
-  width: 3px;
-  border-radius: 3px;
-  background: repeating-linear-gradient(
-    180deg,
-    var(--accent) 0 6px,
-    transparent 6px 12px
-  );
-}
-
-.hl {
-  font-family: var(--font-display);
-  font-style: normal;
-  font-weight: 600;
-  color: var(--ink);
-  background: linear-gradient(transparent 60%, var(--butter) 60%);
-  padding: 0 2px;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
 }
 
 /* 5 · quotes — attribution on a punched docket */
@@ -2226,51 +1866,6 @@ p {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: -10px 5px 0 var(--butter), -20px -1px 0 var(--pistachio);
-}
-
-/* 7 · closing — notice board with an OPEN chip */
-.closing__copy {
-  position: relative;
-  max-width: 48ch;
-  padding: 24px 26px 22px;
-  background:
-    radial-gradient(circle at 15px 15px, var(--butter) 0 4px, transparent 4.5px),
-    radial-gradient(
-      circle at calc(100% - 15px) 15px,
-      var(--butter) 0 4px,
-      transparent 4.5px
-    ),
-    radial-gradient(
-      circle at 15px calc(100% - 15px),
-      var(--butter) 0 4px,
-      transparent 4.5px
-    ),
-    radial-gradient(
-      circle at calc(100% - 15px) calc(100% - 15px),
-      var(--butter) 0 4px,
-      transparent 4.5px
-    ),
-    rgba(255, 249, 242, 0.04);
-  border: 1px dashed #5a453b;
-  border-radius: 18px;
-  color: #cbb8ab;
-}
-
-.closing__copy::before {
-  content: "\25CF  OPEN";
-  position: absolute;
-  top: -13px;
-  left: 26px;
-  padding: 5px 12px;
-  background: var(--accent);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  font-style: normal;
-  letter-spacing: 0.14em;
-  border-radius: var(--pill);
-  border: 2px solid var(--ink);
 }
 
 /* 8 · footer — scribbled note with a drawn underline */

@@ -6,15 +6,16 @@ import HeroCupcakeClient from "./HeroCupcakeClient";
 export default function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="hero__deco" aria-hidden="true">
-        <span className="hero__deco-blob hero__deco-blob--butter" />
-        <span className="hero__deco-blob hero__deco-blob--dough" />
-        <span className="hero__deco-blob hero__deco-blob--pistachio" />
+      <span className="hero__sun" aria-hidden="true" />
 
-        <span className="hero__deco-dot hero__deco-dot--1" />
-        <span className="hero__deco-dot hero__deco-dot--2" />
-        <span className="hero__deco-dot hero__deco-dot--3" />
-        <span className="hero__deco-dot hero__deco-dot--4" />
+      <div className="hero__deco" aria-hidden="true">
+        <span className="hero__sprinkle hero__sprinkle--1" />
+        <span className="hero__sprinkle hero__sprinkle--2" />
+        <span className="hero__sprinkle hero__sprinkle--3" />
+        <span className="hero__sprinkle hero__sprinkle--4" />
+        <span className="hero__sprinkle hero__sprinkle--5" />
+        <span className="hero__sprinkle hero__sprinkle--6" />
+        <span className="hero__sprinkle hero__sprinkle--7" />
 
         <Image
           className="hero__deco-art hero__deco-art--cupcake"
@@ -73,20 +74,6 @@ export default function Hero() {
             </Reveal>
           </div>
 
-          <Reveal className="hero__meta" variant="fade-up" delay={560}>
-            <div>
-              <strong>6</strong>
-              <span>flavours each day</span>
-            </div>
-            <div>
-              <strong>5am</strong>
-              <span>first tray out</span>
-            </div>
-            <div>
-              <strong>Noon</strong>
-              <span>usually sold out</span>
-            </div>
-          </Reveal>
         </div>
       </div>
 

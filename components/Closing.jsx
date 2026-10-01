@@ -6,73 +6,42 @@ import Parallax from "./Parallax";
 export function Closing() {
   return (
     <section className="closing" id="visit">
-      <div className="container closing__cta">
-        <div className="closing__body">
-          <Reveal as="span" className="label eyebrow" variant="wipe-x">
-            Visit us
-          </Reveal>
-          <Reveal
-            as="h2"
-            className="closing__title"
-            variant="fade-up"
-            delay={100}
-          >
-            Come by for the <em>warm ones.</em>
-          </Reveal>
-          <Reveal
-            as="p"
-            className="closing__copy"
-            variant="fade-up"
-            delay={200}
-          >
-            Come early if you want the full case. Pre-order any time and
-            we&rsquo;ll have it tied and waiting on the counter.
-          </Reveal>
+      <Parallax speed={0.1} className="closing__bg">
+        <Image
+          src={IMG.shop}
+          alt=""
+          fill
+          sizes="100vw"
+          className="closing__photo"
+        />
+      </Parallax>
+      <span className="closing__scrim" aria-hidden="true" />
 
-          <div className="closing__actions">
-            <Reveal
-              as="a"
-              className="btn btn--accent"
-              variant="pop"
-              delay={320}
-              href="#top"
-            >
-              Order pickup
-            </Reveal>
-            <Reveal
-              as="a"
-              className="btn btn--outline-light"
-              variant="pop"
-              delay={420}
-              href="#top"
-            >
-              Get directions
-            </Reveal>
-          </div>
+      <div className="container closing__inner">
+        <Reveal as="h2" className="closing__title" variant="fade-up" delay={100}>
+          Come by for the <em>warm ones.</em>
+        </Reveal>
 
-          <Reveal className="closing__hours" variant="fade-up" delay={540}>
-            <span>
-              <strong>Mon – Fri</strong> 7:00am – 2:00pm
-            </span>
-            <span>
-              <strong>Sat – Sun</strong> 8:00am – 1:00pm
-            </span>
-            <span>
-              <strong>Find us</strong> 42 Butter Lane, East Village
-            </span>
-          </Reveal>
-        </div>
+        <Reveal className="closing__actions" variant="pop" delay={240}>
+          <a className="btn btn--accent" href="#top">
+            Order pickup
+          </a>
+          <a className="btn btn--outline-light" href="#top">
+            Get directions
+          </a>
+        </Reveal>
 
-        <Parallax speed={0.06} className="closing__media">
-          <Reveal className="circle-photo" variant="iris" delay={160}>
-            <Image
-              src={IMG.shop}
-              alt="A full case of freshly frosted cupcakes at crumb."
-              width={720}
-              height={720}
-            />
-          </Reveal>
-        </Parallax>
+        <Reveal className="closing__hours" variant="fade-up" delay={380}>
+          <span>
+            <strong>Mon &ndash; Fri</strong> 7:00am &ndash; 2:00pm
+          </span>
+          <span>
+            <strong>Sat &ndash; Sun</strong> 8:00am &ndash; 1:00pm
+          </span>
+          <span>
+            <strong>Find us</strong> 42 Butter Lane, East Village
+          </span>
+        </Reveal>
       </div>
     </section>
   );
@@ -160,7 +129,7 @@ export function Footer() {
         </div>
 
         <Reveal className="footer__bottom" variant="fade-up" delay={440}>
-          <span>© 2026 crumb. Cupcakes baked on Butter Lane since 2019.</span>
+          <span>© 2026 crumb.</span>
           <nav aria-label="Legal">
             <a href="#top">Terms</a>
             <a href="#top">Privacy</a>

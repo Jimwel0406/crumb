@@ -1,9 +1,6 @@
 import Image from "next/image";
 import { IMG } from "../lib/images";
 import Reveal from "./Reveal";
-import Icing from "./Icing";
-import StepsBox from "./StepsBox";
-import Underline from "./Underline";
 
 const RESERVE_ROWS = [
   { label: "Notice", value: "24 hours" },
@@ -60,80 +57,23 @@ export function Band() {
       <span className="band__sprinkles" aria-hidden="true" />
       <div className="container band__inner">
         <Reveal className="band__head" variant="fade-down">
-          <span className="label eyebrow">Order ahead</span>
-          <h2 className="band__title">Reserve a box the night before.</h2>
+          <h2 className="band__title">
+            Reserve a box <span className="band__title-accent">the night before.</span>
+          </h2>
         </Reveal>
 
-        <Reveal className="note-frost" variant="pop" delay={160}>
-          <span className="note-frost__icing" aria-hidden="true">
-            <Icing />
-          </span>
-          <span className="note-frost__sprinkles" aria-hidden="true" />
-          <p className="note-frost__copy">
-            Everything is made that morning. The earlier you come, the more of
-            the board is left.
-          </p>
-          <dl className="note-frost__rows">
-            {RESERVE_ROWS.map((row) => (
-              <div className="note-frost__row" key={row.label}>
-                <dt>{row.label}</dt>
-                <dd>{row.value}</dd>
-              </div>
-            ))}
-          </dl>
+        <Reveal as="dl" className="band__facts" variant="pop" delay={160}>
+          {RESERVE_ROWS.map((row) => (
+            <div className="band__fact" key={row.label}>
+              <dt>{row.label}</dt>
+              <dd>{row.value}</dd>
+            </div>
+          ))}
         </Reveal>
 
         <Reveal as="div" className="band__actions" variant="pop" delay={320}>
           <a className="btn btn--ink" href="#visit">
             Reserve a box
-          </a>
-          <a className="arrow-link band__link" href="#flavours">
-            See today&rsquo;s case <span aria-hidden="true">&rarr;</span>
-            <Underline />
-          </a>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-const STEPS = [
-  {
-    n: "1",
-    title: "Pick your six",
-    copy: "Choose from the case, or ask the bakers to pick the newest thing.",
-  },
-  {
-    n: "2",
-    title: "We bake at dawn",
-    copy: "The batter is mixed at four. Everything is piped by hand.",
-  },
-  {
-    n: "3",
-    title: "Boxed with a bow",
-    copy: "Lined, lidded and tied with a paper ribbon so it travels.",
-  },
-  {
-    n: "4",
-    title: "Pickup or drop-off",
-    copy: "Grab it on Butter Lane, or send it across town before lunch.",
-  },
-];
-
-export function Steps() {
-  return (
-    <section className="steps" id="story">
-      <div className="container">
-        <Reveal className="steps__head" variant="fade-up">
-          <span className="label eyebrow">How it works</span>
-          <h2 className="section-title">From bowl to box in a morning</h2>
-        </Reveal>
-
-        <StepsBox steps={STEPS} />
-
-        <Reveal className="steps__foot" variant="pop" delay={560}>
-          <a className="btn btn--outline" href="#boxes">
-            Build your box
           </a>
         </Reveal>
       </div>
@@ -145,11 +85,8 @@ const PANELS = [
   {
     id: "classic",
     tag: "From $4.50",
-    label: "The forever flavour",
     title: "The classic six",
     note: "Vanilla bean sponge with buttercream.",
-    copy: "Six vanilla cupcakes, swirled high and dusted with vanilla sugar.",
-    hl: "We don’t mess with it.",
     cta: "Add a six-box",
     img: IMG.classic,
     alt: "Pink frosted cupcakes with strawberries",
@@ -159,12 +96,8 @@ const PANELS = [
   {
     id: "seasonal",
     tag: "This month",
-    label: "Seasonal drops",
-    title: "Flavours that move with the market",
-    note: "The flavour board is chalk, and it changes often.",
-    copy:
-      "Saturday market fruit becomes curd, jam and swirls by Monday morning.",
-    hl: "It changes with the market.",
+    title: "Flavours from the market",
+    note: "Stone-fruit sponge with vanilla buttercream.",
     cta: "See what’s dropping",
     img: IMG.seasonal,
     alt: "Brightly coloured cupcakes in purple, yellow and blue",
@@ -174,12 +107,8 @@ const PANELS = [
   {
     id: "boxes",
     tag: "Box of 12",
-    label: "Party boxes",
-    title: "Built for birthdays, launches and long tables",
-    note: "Order a day ahead and we’ll have it ready.",
-    copy:
-      "A dozen in one flavour or a mixed row, card tucked under the lid.",
-    hl: "Offices, weddings, and the occasional apology.",
+    title: "Boxes for every occasion",
+    note: "Assorted sponge with ribbons of buttercream.",
     cta: "Order a party box",
     img: IMG.boxes,
     alt: "Cupcakes with pastel frosting packed in a box",
@@ -227,13 +156,6 @@ export function Panels() {
 
               <div className="panel__body">
                 <Reveal
-                  as="span"
-                  className="label eyebrow"
-                  variant="wipe-x"
-                >
-                  {panel.label}
-                </Reveal>
-                <Reveal
                   as="h2"
                   className="section-title"
                   variant={slide}
@@ -250,22 +172,13 @@ export function Panels() {
                   {panel.note}
                 </Reveal>
                 <Reveal
-                  as="p"
-                  className="lead panel__copy"
+                  as="a"
+                  className="btn btn--accent"
                   variant={slide}
                   delay={280}
-                >
-                  {panel.copy} <span className="hl">{panel.hl}</span>
-                </Reveal>
-                <Reveal
-                  as="a"
-                  className="arrow-link"
-                  variant={slide}
-                  delay={370}
                   href="#visit"
                 >
                   {panel.cta} <span aria-hidden="true">&rarr;</span>
-                  <Underline />
                 </Reveal>
               </div>
             </article>
@@ -311,23 +224,6 @@ export function Strip() {
   return (
     <section className="strip" id="flavours">
       <div className="container">
-        <div className="strip__head">
-          <Reveal className="strip__head-copy" variant="fade-up">
-            <span className="label eyebrow">Today&rsquo;s case</span>
-            <h2 className="section-title">On the board today</h2>
-          </Reveal>
-          <Reveal
-            as="a"
-            className="arrow-link"
-            variant="pop"
-            delay={240}
-            href="#visit"
-          >
-            Full menu <span aria-hidden="true">&rarr;</span>
-            <Underline />
-          </Reveal>
-        </div>
-
         <div className="strip__grid">
           {FLAVORS.map((flavor, i) => (
             <Reveal
